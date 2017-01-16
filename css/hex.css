@@ -1,0 +1,35 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#map .panel-heading {
+	font-weight: bold;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	margin-bottom: 0;
+}
+
+#map .panel-body {
+	background: #fff;
+	padding: 0;
+	position: absolute;
+	width: 100%;
+}
+
+#map .panel-footer { 
+	position: absolute;
+	bottom: 0;
+	z-level: 20;
+	width: 100%;
+	margin-bottom: 0;
+}
+
+#map #orbitform {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
