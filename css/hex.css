@@ -27,6 +27,7 @@ body {
 }
 
 #map #orbitform {
+	background: #fff;
 	display: block;
 	position: relative;
 	width: 100%;
