@@ -47,3 +47,16 @@ body {
 #map #orbitform .search-not-found {
 	display: none;
 }
+
+.mode-data .orbit-calc-total {
+	display: none;
+}
+
+.mode-calc .orbit-calc-total {
+	display: block;
+	font-size: 1.2em;
+}
+
+.mode-calc .orbit-calc-total label {
+	color: inherit;
+}

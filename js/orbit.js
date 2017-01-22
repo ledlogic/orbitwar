@@ -23,7 +23,7 @@ var orbit = {
 		queue.push("orbit.redraw();");
 		
 		$("#search").on("textchange", orbit.search);
-		$(".orbit-mode-menu li").on("click", orbit.modeMenuChanged);
+		$(".orbit-mode-menu li").on("click", orbit.modeChange);
 		
 		queue.next();
 	},
@@ -79,7 +79,7 @@ var orbit = {
 	
 	renderForm: function() {
 		orbit.log("render form");
-		orbit.log("orbit.mode[" + orbit.mode + "]");
+		//orbit.log("orbit.mode[" + orbit.mode + "]");
 		
 		var h = [];
 
@@ -204,10 +204,12 @@ var orbit = {
 		});
 	},
 	
-	modeMenuChanged: function() {
-		orbit.log("modeMenuChanged");
+	modeChange: function() {
+		orbit.log("modeChange");
+		
+		var that = $(this);
 		$("ul.orbit-mode-menu li").removeClass("active");
-		var mode = $(this).data("mode");
+		var mode = that.data("mode");
 		orbit.log("mode[" + mode + "]");
 		var active = $("ul.orbit-mode-menu li.mode-menu-" + mode);
 		active.addClass("active");
@@ -215,11 +217,17 @@ var orbit = {
 		orbit.mode = mode;
 		orbit.renderForm();
 		orbit.recalc();
+		
+		$("body").removeClass("mode-data").removeClass("mode-calc").addClass("mode-" + mode);
+		var modeLabel = that.text();
+		$(".orbit-mode-dropdown-label").html(modeLabel);
 	},
 	
 	recalc: function() {
 		orbit.log("recalc");
+		
 		if (orbit.mode == "calc") {
+			var totalCost = 0;
 			for (var i=0; i<orbit.unitsData.length; i++) {
 				var rowCost = 0;
 				var d = orbit.unitsData[i];
@@ -239,8 +247,10 @@ var orbit = {
 					}					
 					var ccrow = ".orbit-calc-row-" + i;
 					$(ccrow).val(rowCost);
+					totalCost += rowCost;
 				}
 			}
+			$("#costTotal").html(totalCost);
 		}
 	}
 };

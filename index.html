@@ -18,10 +18,10 @@
   	<link href="css/bootstrap-material-design/0.5.10/bootstrap-material-design.css" rel="stylesheet">
   
     <!-- Hex -->
-	<link rel="stylesheet" type="text/css" href="css/hex.css" />
+	<link rel="stylesheet" type="text/css" href="css/orbit.css" />
 
 </head>
-<body>
+<body class="mode-data">
 	<div id="map" class=" panel panel-default">
 		<div class="panel-heading">
 			<div class="bs-component">
@@ -44,14 +44,23 @@
 										</div>
 									</form>
 								</li>
-								<li class="dropdown"><a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
-									Mode
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu orbit-mode-menu">
-									<li class="active mode-menu-table" data-mode="data"><a href="javascript:void(0)">Information</a></li>
-									<li class="mode-menu-calc" data-mode="calc"><a href="javascript:void(0)">Calculator</a></li>
-								</ul></li>
+								<li class="dropdown">
+									<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+										Mode:
+										<span class="orbit-mode-dropdown-label">Data</span>
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu orbit-mode-menu">
+										<li class="active mode-menu-table" data-mode="data"><a href="javascript:void(0)">Data</a></li>
+										<li class="mode-menu-calc" data-mode="calc"><a href="javascript:void(0)">Calculator</a></li>
+									</ul>
+								</li>
+								<li class="orbit-calc-total">
+									<form class="navbar-form navbar-left">
+										<label for="costTotal">Cost:</label>
+										<span id="costTotal" class="cost"></span>
+									</form>
+								</li>
 							</ul>
 						</div>
 					</div>
