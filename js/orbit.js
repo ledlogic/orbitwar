@@ -70,7 +70,7 @@ var orbit = {
 			console.log(s);
 		}
 	},
-
+	
 	renderForm: function() {
 		orbit.log("render form");
 		
@@ -102,8 +102,9 @@ var orbit = {
 				
 				if (t) {
 					th += "<tr>";
-					th += "<td><img src=\"" + u + "\" alt=\"" + t + "\" class=\"unit-type\" /></td>";
-					
+					th += "<td>"
+						+ "<img src=\"" + u + "\" alt=\"" + t + "\" class=\"unit-type\" />"
+					    + "</td>";
 					for (var j in d) {
 						var dj = d[j];
 						if (j == "hdr.unit.type") {
@@ -119,6 +120,17 @@ var orbit = {
 		h.push(th);
 
 		orbit.$orbittable.append(h.join());
+		
+		$('.unit-type').on('click', function() {
+			var alt = $(this).attr('alt');
+			alt = alt.toUpperCase();
+
+			var src = $(this).attr('src');
+			$(this).attr('src', src);
+			$("#complete-dialog .imagepreview").attr("src", src);
+			$("#complete-dialog .modal-title").html(alt);
+			$('#complete-dialog').modal('show');
+		});
 		
 		queue.next();
 	},
