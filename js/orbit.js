@@ -24,6 +24,7 @@ var orbit = {
 	
 	loadUnitsRequest: function() {
 		orbit.log("load units request");
+
 		Papa.parse(orbit.unitsFile, {
 			delimiter: ",",
 			download: true,
@@ -34,6 +35,7 @@ var orbit = {
 	
 	loadUnitsResponse: function(d) {
 		orbit.log("load units response");
+
 		orbit.log(d);
 		orbit.log(d.data);
 		orbit.unitsHdr = d.meta.fields;
@@ -44,6 +46,7 @@ var orbit = {
 	
 	loadUnitHdrRequest: function() {
 		orbit.log("load unit hdr request");
+
 		messageResource.init({
 			filePath : orbit.dataPath
 		});
@@ -52,6 +55,7 @@ var orbit = {
 	
 	loadUnitHdrResponse: function() {
 		orbit.log("load unit hdr response");
+
 		orbit.log(["unitsHdr", orbit.unitsHdr]);
 		for (var i=0; i<orbit.unitsHdr.length; i++) {
 			var key = orbit.unitsHdr[i];
@@ -76,6 +80,7 @@ var orbit = {
 		var th = "";
 		th += "<thead>";
 		th += "<tr>";
+		th += "<th>Counter</th>";
 		for (var i=0; i<orbit.unitsHdr.length; i++) {
 			var key = orbit.unitsHdr[i];
 			var value = messageResource.get(key, orbit.unitHdrModule);
@@ -89,17 +94,26 @@ var orbit = {
 		var th = "";
 		th += "<tbody>";
 		for (var i=0; i<orbit.unitsData.length; i++) {
-			th += "<tr>";
 			var d = orbit.unitsData[i];
-			for (var j in d) {
-				var dj = d[j];
+			console.log(d);
+			if (d) {
+				var u = "img/units/" + d["hdr.unit.type"] + ".fw.png";
+				var t = d["hdr.unit.type"];
 				
-				if (j == "hdr.unit.type") {
-					dj = dj.toUpperCase();
+				if (t) {
+					th += "<tr>";
+					th += "<td><img src=\"" + u + "\" alt=\"" + t + "\" class=\"unit-type\" /></td>";
+					
+					for (var j in d) {
+						var dj = d[j];
+						if (j == "hdr.unit.type") {
+							dj = dj.toUpperCase();
+						}
+						th += "<td>" + dj + "</td>";
+					}
+					th += "</tr>";
 				}
-				th += "<td>" + dj + "</td>";
 			}
-			th += "</tr>";
 		}
 		th += "</tbody>";
 		h.push(th);
@@ -111,6 +125,7 @@ var orbit = {
 	
 	redraw: function() {
 		orbit.log("redraw");
+
 		var $heading = orbit.$map.find(".panel-heading");
 		var $body = orbit.$map.find(".panel-body");
 		var $footer = orbit.$map.find(".panel-footer");

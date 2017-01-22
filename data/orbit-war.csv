@@ -14,5 +14,5 @@ nuke,5,-,-,1,1,1,unlimited,0
 3-mirv,5,-,-,4,4,4,unlimited,0
 7-mirv,5,-,-,8,8,8,unlimited,0
 supply,-,-,-,varies,varies,varies,unlimited,0
-suicide nuke,5 (once only),varies by satellite,0,1,1,1,unlimited,0
-space station,4,4,1,12,n/a,n/a,3,0
+suicide-nuke,5 (once only),varies by satellite,0,1,1,1,unlimited,0
+space-station,4,4,1,12,n/a,n/a,3,0
