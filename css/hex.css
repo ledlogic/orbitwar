@@ -3,18 +3,14 @@ body {
 	padding: 0;
 }
 
-#map .panel-heading {
-	font-weight: bold;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	margin-bottom: 0;
+.navbar, .navbar.navbar-default {
+    background-color: #666;
+    color: #fff;
 }
 
 #map .panel-body {
 	background: #fff;
 	padding: 0;
-	position: absolute;
 	width: 100%;
 }
 
@@ -39,4 +35,8 @@ body {
 .unit-type {
 	height: 20px;
 	width: 20px;
+}
+
+.search-not-found {
+	display: none;
 }

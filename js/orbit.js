@@ -10,6 +10,8 @@ var orbit = {
 	hdr: null,
 	
 	init: function() {
+	    $.material.init();
+
 		orbit.$map = $("#map");
 		orbit.$orbitform = $("#orbitform");
 		orbit.$orbittable = $("#orbittable");
@@ -18,6 +20,8 @@ var orbit = {
 		queue.push("orbit.loadUnitHdrRequest();");
 		queue.push("orbit.renderForm();");
 		queue.push("orbit.redraw();");
+		
+		$("#search").on("textchange", orbit.search);
 		
 		queue.next();
 	},
@@ -95,7 +99,6 @@ var orbit = {
 		th += "<tbody>";
 		for (var i=0; i<orbit.unitsData.length; i++) {
 			var d = orbit.unitsData[i];
-			console.log(d);
 			if (d) {
 				var u = "img/units/" + d["hdr.unit.type"] + ".fw.png";
 				var t = d["hdr.unit.type"];
@@ -149,6 +152,20 @@ var orbit = {
 		$body.css("top", hh + "px");
 		$body.css("bottom", fh + "px");
 	},
+	
+	search: function() {
+		var $search = $("#search");
+		var s = $search.val().toLowerCase();
+		$("#orbittable tbody tr").each(function() {
+			var that = $(this);
+			var t = that.text().toLowerCase();
+			if (t.indexOf(s) > -1) {
+				that.removeClass("search-not-found");
+			} else {
+				that.addClass("search-not-found");
+			}
+		});
+	}
 };
 
 $(function() {
