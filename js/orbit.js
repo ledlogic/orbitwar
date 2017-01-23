@@ -35,7 +35,8 @@ var orbit = {
 			delimiter: ",",
 			download: true,
 			header: true,
-			complete: orbit.loadUnitsResponse
+			complete: orbit.loadUnitsResponse,
+			encoding: "UTF-8"
 		});
 	},
 	
@@ -62,7 +63,7 @@ var orbit = {
 	loadUnitHdrResponse: function() {
 		orbit.log("load unit hdr response");
 
-		orbit.log(["unitsHdr", orbit.unitsHdr]);
+		//orbit.log(["unitsHdr", orbit.unitsHdr]);
 		for (var i=0; i<orbit.unitsHdr.length; i++) {
 			var key = orbit.unitsHdr[i];
 			var value = messageResource.get(key, orbit.unitHdrModule);
@@ -76,134 +77,7 @@ var orbit = {
 			console.log(s);
 		}
 	},
-	
-	renderForm: function() {
-		orbit.log("render form");
-		//orbit.log("orbit.mode[" + orbit.mode + "]");
 		
-		var h = [];
-
-		// head
-		var th = "";
-		th += "<thead>";
-		th += "<tr>";
-		th += "<th>Counter</th>";
-		for (var i=0; i<orbit.unitsHdr.length; i++) {
-			var key = orbit.unitsHdr[i];
-			var value = messageResource.get(key, orbit.unitHdrModule);
-			
-			var colspan = 1;
-			if (orbit.mode === "calc" && key.indexOf("-cost") > -1) {
-				colspan = 2;
-			}
-			
-			th += "<th colspan=\"" + colspan + "\">"
-				+ value
-				+ "</th>";
-		}
-		if (orbit.mode == "calc") {
-			th += "<th>Total</th>";
-		}				
-		th += "</tr>";
-		th += "</thead>";
-		h.push(th);
-
-		// body
-		var th = "";
-		th += "<tbody>";
-		for (var i=0; i<orbit.unitsData.length; i++) {
-			var d = orbit.unitsData[i];
-			if (d) {
-				var u = "img/units/" + d["hdr-unit-type"] + ".fw.png";
-				var t = d["hdr-unit-type"];
-				
-				if (t) {
-					th += "<tr class=\"orbit-row-" + j + "\">";
-					th += "<td>"
-						+ "<img src=\"" + u + "\" alt=\"" + t + "\" class=\"unit-type\" />"
-					    + "</td>";
-					for (var j in d) {
-						var dj = d[j];
-						if (j == "hdr-unit-type") {
-							dj = dj.toUpperCase();
-						}
-						th += "<td>" + dj + "</td>";
-						
-						orbit.log("j[" + j + "]");
-						if (orbit.mode == "calc" && j.indexOf("-cost") > -1) {
-							if ($.isNumeric(dj)) {
-								th += "<td><input type=\"number\" class=\"orbit-calc orbit-calc-" + i + "-" + j + "\" size=\"3\" min=\"0\" pattern=\"^[0-9]\" /></td>";								
-							} else {
-								th += "<td>&nbsp;</td>";
-							}
-						}
-					}
-					
-					if (orbit.mode == "calc") {
-						th += "<td><input type=\"text\" class=\"orbit-calc orbit-calc-row-" + i +"\" size=\"5\" /></td>";
-					}					
-					th += "</tr>";
-				}
-			}
-		}
-		th += "</tbody>";
-		h.push(th);
-
-		orbit.$orbittable.html(h.join());
-		
-		$('.unit-type').on('click', function() {
-			var alt = $(this).attr('alt');
-			alt = alt.toUpperCase();
-
-			var src = $(this).attr('src');
-			$(this).attr('src', src);
-			$("#complete-dialog .imagepreview").attr("src", src);
-			$("#complete-dialog .modal-title").html(alt);
-			$('#complete-dialog').modal('show');
-		});
-		
-		// TODO: debounce
-		$(".orbit-calc").on('textchange', function() {
-			var v0 = $(this).val();
-			var v1 = v0.replace(/[^0-9]/g, '');
-			if (v1 != v0) {
-				$(this).val(v1);
-			}
-			orbit.recalc();
-		});
-		
-		queue.next();
-	},
-	
-	redraw: function() {
-		orbit.log("redraw");
-
-		var $heading = orbit.$map.find(".panel-heading");
-		var $body = orbit.$map.find(".panel-body");
-		var $footer = orbit.$map.find(".panel-footer");
-		
-		var hh = $heading.height() + parseInt($heading.css("padding-top"), 10) + parseInt($heading.css("padding-bottom"), 10);
-		var fh = $footer.height() + parseInt($footer.css("padding-top"), 10) + parseInt($footer.css("padding-bottom"), 10);
-
-		$body.css("top", hh + "px");
-		$body.css("bottom", fh + "px");
-	},
-	
-	search: function() {
-		orbit.log("search");
-		var $search = $("#search");
-		var s = $search.val().toLowerCase();
-		$("#orbittable tbody tr").each(function() {
-			var that = $(this);
-			var t = that.text().toLowerCase();
-			if (t.indexOf(s) > -1) {
-				that.removeClass("search-not-found");
-			} else {
-				that.addClass("search-not-found");
-			}
-		});
-	},
-	
 	modeChange: function() {
 		orbit.log("modeChange");
 		
@@ -252,6 +126,141 @@ var orbit = {
 			}
 			$("#costTotal").html(totalCost);
 		}
+	},
+	
+	redraw: function() {
+		orbit.log("redraw");
+
+		var $heading = orbit.$map.find(".panel-heading");
+		var $body = orbit.$map.find(".panel-body");
+		var $footer = orbit.$map.find(".panel-footer");
+		
+		var hh = $heading.height() + parseInt($heading.css("padding-top"), 10) + parseInt($heading.css("padding-bottom"), 10);
+		var fh = $footer.height() + parseInt($footer.css("padding-top"), 10) + parseInt($footer.css("padding-bottom"), 10);
+
+		$body.css("top", hh + "px");
+		$body.css("bottom", fh + "px");
+	},
+	
+	renderForm: function() {
+		orbit.log("render form");
+		//orbit.log("orbit.mode[" + orbit.mode + "]");
+		
+		var h = [];
+
+		// head
+		var th = "";
+		th += "<thead>";
+		th += "<tr>";
+		th += "<th>Counter</th>";
+		for (var i=0; i<orbit.unitsHdr.length; i++) {
+			var key = orbit.unitsHdr[i];
+			var value = messageResource.get(key, orbit.unitHdrModule);
+			
+			var colspan = 1;
+			if (orbit.mode === "calc" && key.indexOf("-cost") > -1) {
+				colspan = 2;
+			}
+			
+			th += "<th colspan=\"" + colspan + "\" class=\"orbit-header-" + key + "\">"
+				+ value
+				+ "</th>";
+		}
+		if (orbit.mode == "calc") {
+			th += "<th>Total</th>";
+		}				
+		th += "</tr>";
+		th += "</thead>";
+		h.push(th);
+
+		// body
+		var th = "";
+		th += "<tbody>";
+		for (var i=0; i<orbit.unitsData.length; i++) {
+			var d = orbit.unitsData[i];
+			if (d) {
+				var u = "img/units/" + d["hdr-unit-type"] + ".fw.png";
+				var t = d["hdr-unit-type"];
+				
+				if (t) {
+					th += "<tr class=\"orbit-row-" + i + "\">";
+					th += "<td>"
+						+ "<img src=\"" + u + "\" alt=\"" + t + "\" class=\"unit-type\" />"
+					    + "</td>";
+					for (var key in d) {
+						var dj = d[key];
+						if (key == "hdr-unit-type") {
+							dj = dj.toUpperCase();
+						}
+						th += "<td class=\"orbit-header-" + key + "\">" + dj + "</td>";
+						
+						if (orbit.mode == "calc" && key.indexOf("-cost") > -1) {
+							if ($.isNumeric(dj)) {
+								th += "<td><input type=\"number\" class=\"orbit-calc orbit-calc-" + i + "-" + key + "\" size=\"3\" min=\"0\" pattern=\"^[0-9]\" /></td>";								
+							} else {
+								th += "<td>&nbsp;</td>";
+							}
+						}
+					}
+					
+					if (orbit.mode == "calc") {
+						th += "<td><input type=\"text\" class=\"orbit-calc orbit-calc-row-" + i +"\" size=\"5\" /></td>";
+					}					
+					th += "</tr>";
+				}
+			}
+		}
+		th += "</tbody>";
+		h.push(th);
+
+		orbit.$orbittable.html(h.join());
+		
+		$('.unit-type').on('click', orbit.showUnitTypeModal);
+		
+		// TODO: debounce
+		$(".orbit-calc").on('textchange', function() {
+			var v0 = $(this).val();
+			var v1 = v0.replace(/[^0-9]/g, '');
+			if (v1 != v0) {
+				$(this).val(v1);
+			}
+			orbit.recalc();
+		});
+		
+		queue.next();
+	},
+	
+	search: function() {
+		orbit.log("search");
+
+		var $search = $("#search");
+		var s = $search.val().toLowerCase();
+		$("#orbittable tbody tr").each(function() {
+			var that = $(this);
+			var t = that.text().toLowerCase();
+			if (t.indexOf(s) > -1) {
+				that.removeClass("search-not-found");
+			} else {
+				that.addClass("search-not-found");
+			}
+		});
+	},
+	
+	showUnitTypeModal: function() {
+		orbit.log("showUnitTypeModal");
+		
+		var that = $(this);
+		var alt = that.attr('alt');
+		var title = alt.toUpperCase();
+		var descClass = ".orbit-header-hdr-description";
+		var desc = that.parents("tr").find(descClass).text();
+
+		var src = that.attr('src');
+		that.attr('src', src);
+		$("#complete-dialog .imagepreview").attr("src", src);
+		$("#complete-dialog .modal-title").html(title);
+		$("#complete-dialog .orbit-description").html(desc);
+		$('#complete-dialog').modal('show');
 	}
 };
 

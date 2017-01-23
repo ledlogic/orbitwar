@@ -1,18 +1,18 @@
-hdr-unit-type,hdr-att,hdr-def,hdr-movement,hdr-earth-cost,hdr-orbit-cost,hdr-deep-space-cost,hdr-max,hdr-vp
-ewr,0,1,1,1,2,1.5,8,3
-com,0,1,1,1,2,1.5,10,2
-cjs,0,1,2,2,4,2.5,2,2
-owp,1,2,1,1,3,2,10,1
-hk,4,3,2,1,3,2,15,1
-sf,3,2,1,1,2,n/a,3,2
-shuttle,2,1,2,2,4,n/a,6,3
-elr,0,1,3,0.5,n/a,n/a,unlimited,0
-olr,0,1,3,0,0,0,unlimited,0
-mine,6,1,0,0.5,0.5,0.5,unlimited,0
-missle,5,-0,2,0.5,0.5,0.5,unlimited,0
-nuke,5,-0,-0,1,1,1,unlimited,0
-3-mirv,5,-0,-0,4,4,4,unlimited,0
-7-mirv,5,-0,-0,8,8,8,unlimited,0
-supply,-0,-0,-0,varies,varies,varies,unlimited,0
-suicide-nuke,5 (once only),varies by satellite,0,1,1,1,unlimited,0
-space-station,4,4,1,n/a,12,n/a,3,0
+hdr-unit-type,hdr-att,hdr-def,hdr-movement,hdr-earth-cost,hdr-orbit-cost,hdr-deep-space-cost,hdr-max,hdr-vp,hdr-description
+ewr,0,1,1,1,2,1.5,8,3,"Typical ""spy"" satellite equipped with cameras and infrared sensors"
+com,0,1,1,1,2,1.5,10,2,"Unarmed satellite designed to pick up, amplify, and relay signals."
+cjs,0,1,2,2,4,2.5,2,2,Satellite equipped with a variety of electronic countermeasure equipment.
+owp,1,2,1,1,3,2,10,1,"Satellite armed with long-range missles, mines, and a short-range defensive laser."
+hk,4,3,2,1,3,2,15,1,"Heavily armed and armored satellite equipped with high-intensity lasers, designed to destroy other satellites."
+sf,3,2,1,1,2,n/a,3,2,"Squad of elite ""space marines"" trained for combat and sabotage missions in vacuum and weightless conditions."
+shuttle,2,1,2,2,4,n/a,6,3,This is a reusable space vehicle able to launch and return to Earth. It can carry a payload.
+elr,0,1,3,0.5,n/a,n/a,unlimited,0,Earth-Launched Rocket (ELR). This is a typical large payload-carrying rocket.
+olr,0,1,3,0,0,0,unlimited,0,Orbit-Launched Rocket (OLR). This is a small rocket launched from orbit. It can carry a payload.
+mine,6,1,0,0.5,0.5,0.5,unlimited,0,"This is an explosive charge with small thruster rockets and a simple computer ""brain."""
+missle,5,-0,2,0.5,0.5,0.5,unlimited,0,"Missiles have a maximum range of two hexes and an attack strength of 5, and detonate the turn they are launched. Missiles may only be launched from OWP satel-lites, Space Shuttles, or Earth. In effect, this gives these units a special attack with a range of 2 and a strength of 5; there are no missile counters in the game. However, missiles do have a point cost of .5 each. Each player must decide how many missiles to buy and specify which units will carry them. Keep a record of which units have missiles, and mark off each one when it is expended. 8.1 Missiles and Mines. If a missile's path must take it through an enemy mine hex, the enemy player may attack it with a mine. Both mine and missile are automatically lost. This also holds true if the target hex is mined; the mine(s) may intercept the incoming missile(s), one mine counter per missile. The mines' owner decides whether to intercept."
+nuke,5,-0,-0,1,1,1,unlimited,0,This is a single nuclear warhead.
+3-mirv,5,-0,-0,4,4,4,unlimited,0,3-MIRV. This is a package of 3 nuclear warheads.
+7-mirv,5,-0,-0,8,8,8,unlimited,0,This is a package of 7 nuclear warheads.
+supply,-0,-0,-0,varies,varies,varies,unlimited,0,This is a packaged load of mines and missiles to resupply OWP satellites and Space Shuttles.
+suicide-nuke,5 (once only),varies by satellite,0,1,1,1,unlimited,0,"Normal satellites may be designated as nuclear suicide satellites by expending an additional point when buying them (e.g., a Hunter-Killer satellite which is also a suicide satellite will have a total cost of 4 points). Special Forces and Space Shuttles may not be converted into suicide satellites. Suicide satellites need not be revealed until detonation. 18.1 Combat. Suicide satellites may detonate at any time, at the owning player's discretion. Thus, a suicide satel-lite may attack with its regular weapons and then self-de-struct for a second attack, or it may elect to self-destruct before being attacked. Any suicide attack, regardless of sat-ellite type, has an attack strength of 5 against all units, friendly or enemy, in the hex. A suicide satellite which deto-nates is removed from play and the opposing player is awarded victory points for its destruction."
+space-station,4,4,1,n/a,12,n/a,3,0,"Large satellites, built a piece at a time from components carried into orbit by rocket or Shuttle."

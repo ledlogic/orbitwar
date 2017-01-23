@@ -60,3 +60,10 @@ body {
 .mode-calc .orbit-calc-total label {
 	color: inherit;
 }
+
+.orbit-header-hdr-description {
+	display: none;
+}
+.orbit-data-hdr-description {
+	display: none;
+}
