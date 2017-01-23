@@ -54,7 +54,6 @@ body {
 
 .mode-calc .orbit-calc-total {
 	display: block;
-	font-size: 1.2em;
 }
 
 .mode-calc .orbit-calc-total label {
@@ -66,4 +65,12 @@ body {
 }
 .orbit-data-hdr-description {
 	display: none;
+}
+.orbit-calc-total {
+	height: 50px;
+	padding-top: 4px;
+    padding-bottom: 5px;
+}
+.orbit-calc-total label {
+	font-size: 14px;
 }

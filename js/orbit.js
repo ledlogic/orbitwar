@@ -257,10 +257,11 @@ var orbit = {
 
 		var src = that.attr('src');
 		that.attr('src', src);
-		$("#complete-dialog .imagepreview").attr("src", src);
-		$("#complete-dialog .modal-title").html(title);
-		$("#complete-dialog .orbit-description").html(desc);
-		$('#complete-dialog').modal('show');
+		var dialog = $("#complete-dialog");
+		dialog.find(".imagepreview").attr("src", src);
+		dialog.find(".modal-title").html(title);
+		dialog.find(".orbit-description").html(desc);
+		dialog.modal('show');
 	}
 };
 
