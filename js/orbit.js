@@ -128,20 +128,6 @@ var orbit = {
 		}
 	},
 	
-	redraw: function() {
-		orbit.log("redraw");
-
-		var $heading = orbit.$map.find(".panel-heading");
-		var $body = orbit.$map.find(".panel-body");
-		var $footer = orbit.$map.find(".panel-footer");
-		
-		var hh = $heading.height() + parseInt($heading.css("padding-top"), 10) + parseInt($heading.css("padding-bottom"), 10);
-		var fh = $footer.height() + parseInt($footer.css("padding-top"), 10) + parseInt($footer.css("padding-bottom"), 10);
-
-		$body.css("top", hh + "px");
-		$body.css("bottom", fh + "px");
-	},
-	
 	renderForm: function() {
 		orbit.log("render form");
 		//orbit.log("orbit.mode[" + orbit.mode + "]");
@@ -191,6 +177,9 @@ var orbit = {
 						var dj = d[key];
 						if (key == "hdr-unit-type") {
 							dj = dj.toUpperCase();
+						}
+						if (dj == "-0") {
+							dj = "-";
 						}
 						th += "<td class=\"orbit-header-" + key + "\">" + dj + "</td>";
 						
