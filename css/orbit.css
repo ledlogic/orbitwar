@@ -30,6 +30,36 @@ body {
 	text-align: center;
 }
 
+@media (max-width: 768px) {
+	body {
+		font-size: 10px;		
+	}
+	.orbit-calc-total {
+		height: auto;
+		padding: 0 10px 0 10px;
+	}
+	#map #orbitform tr th {
+		/* Safari */
+		-webkit-transform: rotate(-90deg);
+		
+		/* Firefox */
+		-moz-transform: rotate(-90deg);
+		
+		/* IE */
+		-ms-transform: rotate(-90deg);
+		
+		/* Opera */
+		-o-transform: rotate(-90deg);
+		
+		/* Internet Explorer */
+		filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+		height: 70px;		
+		left:-20px;
+		position: relative;
+	}
+}
+
 #map #orbitform .unit-type {
 	height: 20px;
 	width: 20px;
@@ -72,7 +102,6 @@ body {
 }
 
 .orbit-calc-total {
-	height: 50px;
 	padding-top: 4px;
     padding-bottom: 5px;
 }
