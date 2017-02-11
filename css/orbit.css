@@ -6,6 +6,10 @@ body {
 .navbar, .navbar.navbar-default {
 }
 
+#map .navbar-brand {
+	font-weight: bold;
+}
+
 #map .panel-body {
 	background: #fff;
 	width: 100%;
@@ -75,4 +79,8 @@ body {
 
 .orbit-calc-total label {
 	font-size: 14px;
+}
+
+#search {
+	padding: 2px 0 0 0;
 }
