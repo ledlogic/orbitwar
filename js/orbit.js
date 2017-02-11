@@ -24,6 +24,7 @@ var orbit = {
 		
 		$("#search").on("textchange", orbit.search);
 		$(".orbit-mode-menu li").on("click", orbit.modeChange);
+		$(".orbit-calc-reset").on("click", orbit.resetCalc);
 		
 		queue.next();
 	},
@@ -111,21 +112,29 @@ var orbit = {
 						if (j.indexOf("-cost") > -1) {
 							var classRef = ".orbit-calc-" + i + "-" + j;
 							var val = $(classRef).val();
-							var q = parseInt(val, 10);
+							var q = parseFloat(val, 10);
 							q = q ? q : 0;
-							var cost = parseInt(dj, 10);
+							var cost = parseFloat(dj, 10);
 							cost = cost ? cost : 0;
 							//orbit.log("i[" + i + "], d[" + d + "], j[" + j + "], dj[" + dj + "], classRef[" + classRef + "], q[" + q + "], cost[" + cost + "]");
 							rowCost += q * cost;
 						}
 					}					
 					var ccrow = ".orbit-calc-row-" + i;
-					$(ccrow).val(rowCost);
+					var rowCostDisp = rowCost ? rowCost : "";
+					$(ccrow).val(rowCostDisp);
 					totalCost += rowCost;
 				}
 			}
 			$("#costTotal").html(totalCost);
 		}
+	},
+	
+	resetCalc: function() {
+		orbit.log("resetCalc");
+		
+		$("input").val("");
+		orbit.recalc();
 	},
 	
 	renderForm: function() {

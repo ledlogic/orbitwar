@@ -22,6 +22,7 @@ body {
 
 #map #orbitform tr th,
 #map #orbitform tr td {
+	padding: 4px;
 	text-align: center;
 }
 
@@ -51,17 +52,27 @@ body {
 	color: inherit;
 }
 
+.mode-calc .orbit-calc-reset {
+    border-bottom: 1px solid #fff;
+	color: #fff;
+    font-weight: normal;
+    padding: 0;
+}
+
 .orbit-header-hdr-description {
 	display: none;
 }
+
 .orbit-data-hdr-description {
 	display: none;
 }
+
 .orbit-calc-total {
 	height: 50px;
 	padding-top: 4px;
     padding-bottom: 5px;
 }
+
 .orbit-calc-total label {
 	font-size: 14px;
 }
